@@ -73,11 +73,16 @@ const SignupForm = ({ navigation }) => {
   };
 
   const sumbitForm = () => {
-    if (isValidForm()) {
-      // submit form
-      console.log(userInfo);
-      
+    try {
+      if (isValidForm()) {
+        // submit form
+        console.log(userInfo);
+      }
     }
+    catch (err) {
+      console.log(err);
+    }
+
   };
 
   const signUp = async (values, formikActions) => {
