@@ -73,11 +73,16 @@ const SignupForm = ({ navigation }) => {
   };
 
   const sumbitForm = () => {
-    if (isValidForm()) {
-      // submit form
-      console.log(userInfo);
-      
+    try {
+      if (isValidForm()) {
+        // submit form
+        console.log(userInfo);
+      }
     }
+    catch (err) {
+      console.log(err);
+    }
+
   };
 
   const signUp = async (values, formikActions) => {
@@ -86,6 +91,7 @@ const SignupForm = ({ navigation }) => {
       ...values,
     });
 
+    // TODO ; Handle if not Success
     if (res.data.success) {
       const signInRes = await client.post('/sign-in', {
         email: values.email,

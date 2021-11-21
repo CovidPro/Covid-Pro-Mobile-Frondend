@@ -33,49 +33,45 @@ const Tasks = () => {
   // Check permissions and return the screens
   if (hasPermission === null) {
     return (
-      <View style={styles.container}>
-        <Text>Requesting for camera permission</Text>
-      </View>)
+        <View style={styles.container}>
+          <Text>Requesting for camera permission</Text>
+        </View>)
   }
   if (hasPermission === false) {
     return (
-      <View style={styles.container}>
-        <Text style={{ margin: 10 }}>No access to camera</Text>
-        <Button title={'Allow Camera'} onPress={() => askForCameraPermission()} />
-      </View>)
+        <View style={styles.container}>
+          <Text style={{ margin: 10 }}>No access to camera</Text>
+          <Button title={'Allow Camera'} onPress={() => askForCameraPermission()} />
+        </View>)
   }
 
   // Return the View
-    return (
-    <View style={styles.container}>
-      <View style={styles.barcodebox}>
-        <BarCodeScanner
-          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={{ height: 400, width: 400 }} />
-      </View>
-      <Text style={styles.maintext}>{text}</Text>
+  return (
+      <View style={styles.container}>
+        <View style={styles.barcodebox}>
+          <BarCodeScanner
+              onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+              style={{ height: 400, width: 400 }} />
+        </View>
+        <Text style={styles.maintext}>{text}</Text>
 
-      {scanned && <Button title={'Scan again?'} onPress={() => setScanned(false)} color='tomato' />}
-    </View>
+        {scanned && <Button title={'Scan again?'} onPress={() => setScanned(false)} color='tomato' />}
+      </View>
   );
 }
 /*
-
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo-camera';
-
 const Tasks = () => {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
-
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestPermissionsAsync();
       setHasPermission(status === 'granted');
     })();
   }, []);
-
   if (hasPermission === null) {
     return <View />;
   }
@@ -102,8 +98,7 @@ const Tasks = () => {
     </View>
   );
 }
-
-// const styles = StyleSheet.create({ ... }); 
+// const styles = StyleSheet.create({ ... });
 */
 
 const styles = StyleSheet.create({
