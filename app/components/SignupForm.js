@@ -13,10 +13,22 @@ import * as Yup from 'yup';
 import client from '../api/client';
 
 const validationSchema = Yup.object({
+
+  nic: Yup.string()
+    .required('NIC is required')
+    .min(10, 'NIC must be 10 characters long')
+    .max(10, 'NIC must be 10 characters long'),
   fullname: Yup.string()
     .trim()
     .min(3, 'Invalid name!')
     .required('Name is required!'),
+  address: Yup.string()
+    .required('Address is required')
+    .min(5, 'Invalid address!'),
+  contactNo: Yup.string()
+    .required('Contact No is required')
+    .min(10, 'Invalid contact no!')
+    .max(15, 'Invalid contact no!'),
   email: Yup.string().email('Invalid email!').required('Email is required!'),
   password: Yup.string()
     .trim()
@@ -30,7 +42,10 @@ const validationSchema = Yup.object({
 
 const SignupForm = ({ navigation }) => {
   const userInfo = {
+    nic: '',
     fullname: '',
+    address: '',
+    contactNo: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -131,9 +146,17 @@ const SignupForm = ({ navigation }) => {
           handleBlur,
           handleSubmit,
         }) => {
-          const { fullname, email, password, confirmPassword } = values;
+          const { nic,fullname, address, contactNo, email, password, confirmPassword } = values;
           return (
             <>
+              <FormInput
+                value={nic}
+                error={touched.nic && errors.nic}
+                onChangeText={handleChange('nic')}
+                onBlur={handleBlur('nic')}
+                label="NIC"
+                placeholder="Enter NIC"
+              />
               <FormInput
                 value={fullname}
                 error={touched.fullname && errors.fullname}
@@ -141,6 +164,22 @@ const SignupForm = ({ navigation }) => {
                 onBlur={handleBlur('fullname')}
                 label='Full Name'
                 placeholder='John Smith'
+              />
+              <FormInput
+                value={address}
+                error={touched.address && errors.address}
+                onChangeText={handleChange('address')}
+                onBlur={handleBlur('address')}
+                label='Address'
+                placeholder='Address'
+              />
+              <FormInput
+                value={contactNo}
+                error={touched.contactNo && errors.contactNo}
+                onChangeText={handleChange('contactNo')}
+                onBlur={handleBlur('contactNo')}
+                label='Contact No'
+                placeholder='Contact No'
               />
               <FormInput
                 value={email}
