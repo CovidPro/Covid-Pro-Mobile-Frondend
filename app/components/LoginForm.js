@@ -38,19 +38,13 @@ const LoginForm = () => {
     console.log('submitForm............');
     if (isValidForm()) {
       try {
-         
         const res = await client.post('/sign-in', { ...userInfo });
-        console.log('found me here submitForm');
         if (res.data.success) {
           setUserInfo({ email: '', password: '' });
           setProfile(res.data.user);
           setIsLoggedIn(true);
         }
-
-        console.log(res.data);
-      } catch (error) {
-        console.log('found me here' +error);
-      }
+      } catch (error) {}
     }
   };
 

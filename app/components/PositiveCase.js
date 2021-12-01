@@ -2,17 +2,20 @@ import React from 'react';
 import { View, StyleSheet, Text, Alert } from 'react-native';
 import { Button } from 'react-native-web';
 import client from '../api/client';
+import axios from 'axios';
 
-const positive = async() => {
-  console.log('positive......');
-  const res = await client.post('/positive', 'Im Covid-19 positive');
+const positive = async () => {
+  Alert.alert('You are positive');
+  console.log('positive');
+  await client.post('/positive');
+  // axios.post('http://localhost:5000/positive');
 };
   
 const PositiveCase = () => {
   return (
     <View style={styles.container}>
       <Text>If You Are Covid-19 Positive</Text>
-        <Button onPress={()=> positive()} title='Click Here' />
+        <Button title={'CLICK HERE'} onPress={() => positive()} />
     </View>
   );
 };
