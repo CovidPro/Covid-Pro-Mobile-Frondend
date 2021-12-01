@@ -76,7 +76,7 @@ const LoginForm = () => {
         autoCapitalize='none'
         secureTextEntry
       />
-      <FormSubmitButton onPress={submitForm} title='Login'/>
+      <FormSubmitButton onPress={submitForm} title='Login' />
     </FormContainer>
   );
 };

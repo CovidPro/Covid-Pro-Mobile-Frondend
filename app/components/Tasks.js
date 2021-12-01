@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import {test, setText} from 'react-native';
 import * as Permissions from 'expo-permissions';
 
 const Tasks = () => {
 
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-  // const [text, setText] = useState('Not yet scanned')
+  const [text, setText] = useState('Not yet scanned')
 
   const askForCameraPermission = () => {
     (async () => {
@@ -55,51 +56,10 @@ const Tasks = () => {
         </View>
         <Text style={styles.maintext}>{text}</Text>
 
-        {scanned && <Button title={'Scan again?'} onPress={() => setScanned(false)} color='tomato' />}
+        {scanned && <Button title={'Scan again?'} onPress={() => setScanned(false)} color='skyblue' />}
       </View>
   );
 }
-/*
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { Camera } from 'expo-camera';
-const Tasks = () => {
-  const [hasPermission, setHasPermission] = useState(null);
-  const [type, setType] = useState(Camera.Constants.Type.back);
-  useEffect(() => {
-    (async () => {
-      const { status } = await Camera.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
-    })();
-  }, []);
-  if (hasPermission === null) {
-    return <View />;
-  }
-  if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
-  }
-  return (
-    <View style={styles.container}>
-      <Camera style={styles.camera} type={type}>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              setType(
-                type === Camera.Constants.Type.back
-                  ? Camera.Constants.Type.front
-                  : Camera.Constants.Type.back
-              );
-            }}>
-            <Text style={styles.text}> Flip </Text>
-          </TouchableOpacity>
-        </View>
-      </Camera>
-    </View>
-  );
-}
-// const styles = StyleSheet.create({ ... });
-*/
 
 const styles = StyleSheet.create({
   container: {
@@ -119,7 +79,7 @@ const styles = StyleSheet.create({
     width: 300,
     overflow: 'hidden',
     borderRadius: 30,
-    backgroundColor: 'tomato'
+    backgroundColor: 'skyblue'
   }
 });
 
