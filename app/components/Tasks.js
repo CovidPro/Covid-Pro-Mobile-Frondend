@@ -3,8 +3,9 @@ import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import {test, setText} from 'react-native';
 import * as Permissions from 'expo-permissions';
-
+import client from '../api/client';
 const Tasks = () => {
+
 
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
@@ -25,10 +26,11 @@ const Tasks = () => {
   }, []);
 
   // // What happens when we scan the bar code
-  const handleBarCodeScanned = ({ type, data }) => {
+  const handleBarCodeScanned = async({ type, data }) => {
     setScanned(true);
     setText(data)
-    console.log('Type: ' + type + '\nData: ' + data)
+    console.log('Type: ' + type + '\nData: ' + data);
+    await client.post('/tasks');
   };
 
   // Check permissions and return the screens

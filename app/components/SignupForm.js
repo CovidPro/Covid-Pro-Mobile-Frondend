@@ -102,30 +102,35 @@ const SignupForm = ({ navigation }) => {
 
   const signUp = async (values, formikActions) => {
     console.log(values);
+    global.foo = { ...values };
     const res = await client.post('/create-user', {
       ...values,
     });
+    try {
+      // TODO ; Handle if not Success
+      if (res.data.success) {
+        global.foo = { ...values };
+        const signInRes = await client.post('/sign-in', {
+          email: values.email,
+          password: values.password,
+        });
+        if (signInRes.data.success) {
+          // if cannot run correctly then comment bellow 3
+          // navigation.dispatch(
+          //   StackActions.replace('ImageUpload', {
+          //     token: signInRes.data.token,
+          //   })
+          // );
 
-    // TODO ; Handle if not Success
-    if (res.data.success) {
-      const signInRes = await client.post('/sign-in', {
-        email: values.email,
-        password: values.password,
-      });
-      if (signInRes.data.success) {
-        // if cannot run correctly then comment bellow 3
-        // navigation.dispatch(
-        //   StackActions.replace('ImageUpload', {
-        //     token: signInRes.data.token,
-        //   })
-        // );
-
-        //navigation.dispatch(StackActions.replace('AppForm'));
-        setProfile(signInRes.data.user);
-        setIsLoggedIn(true);
+          //navigation.dispatch(StackActions.replace('AppForm'));
+          setProfile(signInRes.data.user);
+          setIsLoggedIn(true);
+        }
       }
     }
-
+    catch (err) {
+      console.log(err);
+    }
     formikActions.resetForm();
     formikActions.setSubmitting(false);
   };

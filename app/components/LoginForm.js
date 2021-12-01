@@ -6,6 +6,8 @@ import { isValidEmail, isValidObjField, updateError } from '../utils/methods';
 import FormContainer from './FormContainer';
 import FormInput from './FormInput';
 import FormSubmitButton from './FormSubmitButton';
+// import global from '/global';
+
 
 const LoginForm = () => {
   const { setIsLoggedIn, setProfile } = useLogin();
@@ -38,6 +40,7 @@ const LoginForm = () => {
     console.log('submitForm............');
     if (isValidForm()) {
       try {
+        global.foo = { ...userInfo };
         const res = await client.post('/sign-in', { ...userInfo });
         if (res.data.success) {
           setUserInfo({ email: '', password: '' });
