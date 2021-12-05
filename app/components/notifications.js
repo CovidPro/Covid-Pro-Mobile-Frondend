@@ -7,7 +7,13 @@ const findNotifications = async () => {
   const notify = await client.post('/find', { ...global.foo });
   
   console.log(notify.data);
-  Alert.alert(notify.data);
+  if (notify.data) {
+    Alert.alert(notify.data);
+  }
+  else {
+    Alert.alert('You Are Ok.. Stay Safe!');
+  }
+  return notify.data;
 };
 
 const Notifications = () => {
@@ -16,7 +22,7 @@ const Notifications = () => {
       <Text>Covid Updates</Text>
       <Text></Text>
       <Text>Check for updates</Text>
-      <Button title={'CLICK HERE'} color='rgba(27,27,51,1)'onPress={() => findNotifications()} />
+      <Button title={'CLICK HERE'} color='rgba(27,27,51,1)'onPress={ () =>   findNotifications()} />
     </View>
   );
 };
