@@ -58,7 +58,7 @@ const Tasks = () => {
         </View>
         <Text style={styles.maintext}>{text}</Text>
 
-        {scanned && <Button title={'Scan again?'} onPress={() => setScanned(false)} color='skyblue' />}
+        {scanned && <Button title={'Scan again?'} onPress={() => setScanned(false)} color={'rgba(27,27,51,1)'}/>}
       </View>
   );
 }
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     width: 300,
     overflow: 'hidden',
     borderRadius: 30,
-    backgroundColor: 'skyblue'
+    backgroundColor: 'rgba(27,27,51,1)',
   }
 });
 

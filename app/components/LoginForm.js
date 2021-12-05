@@ -36,7 +36,7 @@ const LoginForm = () => {
     return true;
   };
 
-  const submitForm = async () => {
+  const submitForm = async() => {
     console.log('submitForm............');
     if (isValidForm()) {
       try {

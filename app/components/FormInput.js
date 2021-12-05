@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text, TextInput } from 'react-native';
+// import { Dropdown } from 'react-native';
+
 
 const FormInput = props => {
   const { placeholder, label, error } = props;

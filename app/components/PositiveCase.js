@@ -3,9 +3,6 @@ import { View, StyleSheet, Text, Alert, Button } from 'react-native';
 import client from '../api/client';
 import axios from 'axios';
 
-
-
-
 const positive = async () => {
   
   Alert.alert('You are positive');
@@ -15,13 +12,13 @@ const positive = async () => {
 };
   
 const PositiveCase = () => {
-
   const { email, password } = global.foo;
   return (
     <View style={styles.container}>
       <Text>{email}</Text>
+      <Text> </Text>
       <Text>If You Are Covid-19 Positive</Text>
-        <Button title={'CLICK HERE'} onPress={() => positive()} ></Button>
+        <Button title={'CLICK HERE'} onPress={() => positive()} color='rgba(27,27,51,1)'/>
     </View>
   );
 };
@@ -29,8 +26,9 @@ const PositiveCase = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    color: '#fff',
     alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
