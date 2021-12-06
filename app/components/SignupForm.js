@@ -6,7 +6,7 @@ import FormContainer from './FormContainer';
 import FormInput from './FormInput';
 import FormSubmitButton from './FormSubmitButton';
 import { StackActions } from '@react-navigation/native';
-
+import DropDownPicker from 'react-native-dropdown-picker';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -18,6 +18,8 @@ const validationSchema = Yup.object({
     .required('NIC is required')
     .min(10, 'NIC must be 10 characters long')
     .max(10, 'NIC must be 10 characters long'),
+  status: Yup.string()
+    .required('Role is required'),
   fullname: Yup.string()
     .trim()
     .min(3, 'Invalid name!')
@@ -43,6 +45,7 @@ const validationSchema = Yup.object({
 const SignupForm = ({ navigation }) => {
   const userInfo = {
     nic: '',
+    status: '',
     fullname: '',
     address: '',
     contactNo: '',
@@ -53,12 +56,6 @@ const SignupForm = ({ navigation }) => {
 
   const { setIsLoggedIn, setProfile } = useLogin();
   const [error, setError] = useState('');
-  /*const [userInfo, setUserInfo] = useState({
-                                    fullname: '',
-                                    email: '',
-                                    password: '',
-                                    confirmPassword: '',
-                                  });*/
 
 
   const { fullname, email, password, confirmPassword } = userInfo;
@@ -102,35 +99,42 @@ const SignupForm = ({ navigation }) => {
 
   const signUp = async (values, formikActions) => {
     console.log(values);
+    global.foo = { ...values };
     const res = await client.post('/create-user', {
       ...values,
     });
+    try {
+      // TODO ; Handle if not Success
+      if (res.data.success) {
+        global.foo = { ...values };
+        const signInRes = await client.post('/sign-in', {
+          email: values.email,
+          password: values.password,
+        });
+        if (signInRes.data.success) {
+          // if cannot run correctly then comment bellow 3
+          // navigation.dispatch(
+          //   StackActions.replace('ImageUpload', {
+          //     token: signInRes.data.token,
+          //   })
+          // );
 
-    // TODO ; Handle if not Success
-    if (res.data.success) {
-      const signInRes = await client.post('/sign-in', {
-        email: values.email,
-        password: values.password,
-      });
-      if (signInRes.data.success) {
-        // if cannot run correctly then comment bellow 3
-        // navigation.dispatch(
-        //   StackActions.replace('ImageUpload', {
-        //     token: signInRes.data.token,
-        //   })
-        // );
-
-        //navigation.dispatch(StackActions.replace('AppForm'));
-        setProfile(signInRes.data.user);
-        setIsLoggedIn(true);
+          //navigation.dispatch(StackActions.replace('AppForm'));
+          setProfile(signInRes.data.user);
+          setIsLoggedIn(true);
+        }
       }
     }
-
+    catch (err) {
+      console.log(err);
+    }
     formikActions.resetForm();
     formikActions.setSubmitting(false);
   };
   
   return (
+    
+
     <FormContainer>
       <Formik
         initialValues={userInfo}
@@ -146,7 +150,7 @@ const SignupForm = ({ navigation }) => {
           handleBlur,
           handleSubmit,
         }) => {
-          const { nic,fullname, address, contactNo, email, password, confirmPassword } = values;
+          const { nic,status,fullname, address, contactNo, email, password, confirmPassword } = values;
           return (
             <>
               <FormInput
@@ -156,6 +160,22 @@ const SignupForm = ({ navigation }) => {
                 onBlur={handleBlur('nic')}
                 label="NIC"
                 placeholder="Enter NIC"
+              />
+
+              {/* <DropDownPicker
+                multiple={true}
+                min={2}
+                label="Role"
+                items={['Customer', 'Staff Member']}
+                value={role}
+              />               */}
+              <FormInput
+                value={status}
+                error={touched.status && errors.status}
+                onChangeText={handleChange('status')}
+                onBlur={handleBlur('status')}
+                label="Role"
+                placeholder="Enter Your Role(Customer/Staff)"
               />
               <FormInput
                 value={fullname}

@@ -10,6 +10,8 @@ import Home from './components/Home';
 import Tasks from './components/Tasks';
 import PositiveCase from './components/PositiveCase';
 import { useLogin } from './context/LoginProvider';
+import Notifications from './components/notifications';
+import OCR from './components/OCR';
 
 const Drawer = createDrawerNavigator();
 
@@ -74,9 +76,11 @@ const DrawerNavigator = () => {
       }}
       drawerContent={props => <CustomDrawer {...props} />}
     >
-      <Drawer.Screen component={Home} name='Main' />
+      <Drawer.Screen component={Home} name='Home' />
+      <Drawer.Screen component={Notifications} name='Notifications' />
       <Drawer.Screen component={Tasks} name='QR-Scanner' />
       <Drawer.Screen component={PositiveCase} name='Positive Case' />
+      <Drawer.Screen component={OCR} name='Id-scanner' />
     </Drawer.Navigator>
   );
 };
