@@ -24,21 +24,28 @@
     "expo-image-picker": "~10.1.4",
     "expo-status-bar": "~1.0.4",
     "formik": "^2.2.6",
+    "image-loader": "0.0.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-images-upload": "^1.2.8",
     "react-native": "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz",
     "react-native-dropdown-picker": "^5.2.3",
     "react-native-gesture-handler": "~1.10.2",
+    "react-native-image-picker": "^4.4.0",
     "react-native-material-dropdown": "^0.11.1",
     "react-native-reanimated": "~2.1.0",
     "react-native-safe-area-context": "3.2.0",
     "react-native-scan-barcode": "^3.1.7",
     "react-native-screens": "~3.0.0",
     "react-native-web": "~0.13.12",
+    "react-spinners": "^0.11.0",
+    "rn-text-detector": "0.0.8",
+    "tesseract.js": "^2.1.5",
     "yup": "^0.32.9"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0"
+    "@babel/core": "^7.9.0",
+    "css-loader": "^6.5.1"
   },
   "private": true
 }
