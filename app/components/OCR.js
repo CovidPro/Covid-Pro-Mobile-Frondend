@@ -1,20 +1,17 @@
-import React from 'react';
-import { View, StyleSheet, Text, Button } from 'react-native';
+import ImageLoader from "H:/se project/Covid-Pro-Mobile-Frondend - Copy (2)/src/scripts/imageLoader/imageLoader.js";
+import "H:/se project/Covid-Pro-Mobile-Frondend - Copy (2)/src/App.css";
 
-const OCR = () => {
-  return (
-    <View style={styles.container}>
-      <Text>Scan Your Id</Text>
-    </View>
+import React from "react";
+
+const OCR= () => {
+    return (
+    <div className="center">
+      <h1 className="title">Scan Your License Here</h1>
+      <div>
+        <ImageLoader />
+      </div>
+    </div>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+}
 
 export default OCR;
